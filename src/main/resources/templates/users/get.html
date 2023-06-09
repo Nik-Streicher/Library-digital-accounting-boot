@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User</title>
+</head>
+<body>
+
+<p><a th:text="|${user.fullName}, ${user.yearOfBirth}|"></a></p>
+<div th:if="${books.isEmpty()}">
+    <div>The user did not take any book</div>
+</div>
+
+<div th:unless="${books.isEmpty()}">
+    <hr>
+    <p><strong>Books:</strong></p>
+    <p th:each="book: ${books}">
+        <a th:style="${book.isExpired() ? 'color:red' : 'color:black'}" th:text="|${book.title}, ${book.author}, ${book.releaseYear}|">Book info</a>
+    </p>
+</div>
+
+
+<hr>
+<p>
+<form th:method="GET" th:action="@{/people/{id}/edit(id=${user.userId})}">
+    <input type="submit" value="Edit"/>
+</form>
+</p>
+
+<p>
+<form th:method="DELETE" th:action="@{/people/{id}(id=${user.userId})}">
+    <input type="submit" value="Delete"/>
+</form>
+</p>
+
+</body>
+</html>

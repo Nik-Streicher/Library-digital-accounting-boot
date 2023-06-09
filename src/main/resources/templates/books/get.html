@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book</title>
+</head>
+<body>
+
+<p><a th:text="| ${book.title}, ${book.author}, ${book.releaseYear}|"></a></p>
+
+<div th:unless="${loan}">
+
+    <form th:method="PATCH" th:action="@{/books/{id}/appoint(id=${book.bookId})}">
+        <p>The book is not in use, who appoints it?</p>
+        <label th:for="user">Select User</label>
+        <select th:object="${person}" th:field="*{userId}" id="user">
+            <option th:each="user : ${users}" th:value="${user.userId}"
+                    th:text="${user.fullName}">
+            </option>
+        </select>
+
+        <input type="submit" value="Appoint book">
+    </form>
+</div>
+
+<div th:if="${loan}">
+
+    <p th:text="|The book has now: ${loan.fullName}|">text</p>
+
+    <form th:method="DELETE" th:action="@{/books/{id}/release(id=${book.bookId})}">
+        <input type="submit" value="Release!"/>
+    </form>
+</div>
+
+<hr>
+<form th:method="GET" th:action="@{/books/{id}/edit(id=${book.bookId})}">
+    <input type="submit" value="Edit"/>
+</form>
+<br>
+<form th:method="DELETE" th:action="@{/books/{id}(id=${book.bookId})}">
+    <input type="submit" value="Delete"/>
+</form>
+
+</body>
+</html>

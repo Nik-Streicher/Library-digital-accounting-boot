@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Books</title>
+</head>
+<body>
+<p th:each="book: ${books}">
+    <a th:href="@{/books/{id}(id=${book.bookId})}" th:text="|${book.title}, ${book.author} , ${book.releaseYear}|">Username</a>
+</p>
+<br>
+<hr>
+<a href="/books/new">Add new book</a>
+</body>
+</html>

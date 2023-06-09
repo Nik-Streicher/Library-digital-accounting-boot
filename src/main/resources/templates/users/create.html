@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register User</title>
+</head>
+<body>
+<form th:method="POST" th:action="@{/people}" th:object="${emptyUser}">
+
+  <label for="fullName">Enter Full name:</label>
+  <input type="text" th:field="*{fullName}" id="fullName"/>
+
+  <p style="color:red" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}">ERROR</p>
+
+<p></p>
+  <label for="yearOfBirth">Enter year of birth:</label>
+  <input type="number" value="1900" min=1899 th:field="*{yearOfBirth}" id="yearOfBirth"/>
+
+  <br/>
+
+  <input type="submit" value="Create!">
+
+</form>
+</body>
+</html>

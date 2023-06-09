@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:color="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Search</title>
+</head>
+<body>
+
+<form th:method="POST" th:action="@{/books/search}">
+    <label for="query">Enter a search term: </label>
+    <input type="text" id="query" name="query"/>
+    <br>
+    <input type="submit" value="Search">
+</form>
+
+
+<div th:if="${books}">
+    <div th:if="${books.isEmpty()}">
+        <div>The book wasn't  found</div>
+    </div>
+
+    <div th:unless="${books.isEmpty()}">
+        <p th:each="book: ${books}">
+            <a th:text="|${book.title}, ${book.author}, ${book.releaseYear}|">Book info</a>
+        </p>
+        <hr>
+    </div>
+</div>
+
+</body>
+</html>
